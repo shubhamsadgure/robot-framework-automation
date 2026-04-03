@@ -1,0 +1,23 @@
+# Python virtual environment
+.venv/
+
+# PyCharm settings
+.idea/
+
+# Robot Framework outputs
+log/
+output.xml
+report.html
+pabot_results/
+.pabotsuitenames
+
+# Logs and reports
+*.html
+*.xml
+
+# Screenshots
+*.png
+
+# Python cache
+__pycache__/
+*.pyc
