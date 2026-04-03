@@ -44,7 +44,7 @@ Open Login Page
     Evaluate    $options.add_argument("--disable-gpu")
     Evaluate    $options.add_argument("--window-size=1920,1080")
 
-    Open Browser    ${URL}    chrome    remote_url=http://192.168.120.204:4444    options=${options}
+    Open Browser    ${URL}    chrome    options=${options}
 
     Maximize Browser Window
     Wait Until Element Is Visible    ${USERNAME_INPUT}    10s
