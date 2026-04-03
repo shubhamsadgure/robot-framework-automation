@@ -44,10 +44,21 @@ Open Login Page
     Evaluate    $options.add_argument("--disable-gpu")
     Evaluate    $options.add_argument("--window-size=1920,1080")
 
-    Open Browser    ${URL}    chrome    options=${options}
+    # 🔥 Disable password manager completely
+    ${prefs}=    Create Dictionary
+    ...    credentials_enable_service=False
+    ...    profile.password_manager_enabled=False
+    ...    safebrowsing.enabled=False
 
-    Maximize Browser Window
-    Wait Until Element Is Visible    ${USERNAME_INPUT}    10s
+    Evaluate    $options.add_experimental_option("prefs", ${prefs})
+
+    # 🔥 Additional Chrome flags (VERY IMPORTANT)
+    Evaluate    $options.add_argument("--disable-notifications")
+    Evaluate    $options.add_argument("--disable-save-password-bubble")
+    Evaluate    $options.add_argument("--disable-infobars")
+    Evaluate    $options.add_argument("--incognito")
+
+    Open Browser    ${URL}    chrome    options=${options}
 
 
 Get All Usernames
@@ -71,6 +82,7 @@ Login With Credentials
     Input Text        ${USERNAME_INPUT}    ${username}
     Input Password    ${PASSWORD_INPUT}    ${password}
     Click Button      ${LOGIN_BUTTON}
+
 
 
 Login With Random User
