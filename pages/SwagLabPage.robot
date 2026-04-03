@@ -144,8 +144,9 @@ Validate Products In Cart
     Page Should Contain    Sauce Labs Fleece Jacket
 
 Click Checkout Button
-    Wait Until Element Is Visible    ${Click_On_Check_Out}    30s
+    Wait Until Element Is Present    ${Click_On_Check_Out}    30s
     Scroll Element Into View         ${Click_On_Check_Out}
+    Wait Until Element Is Visible    ${Click_On_Check_Out}    30s
     Click Element                    ${Click_On_Check_Out}
 
 
