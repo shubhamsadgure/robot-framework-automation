@@ -33,15 +33,19 @@ ${Total_Price}               xpath://div[@class='summary_total_label']
 ${Click_On_Finish}           id:finish
 
 
-
-
-
 *** Keywords ***
 
 Open Login Page
-    ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys
-    Call Method    ${options}    add_argument    --incognito
+    ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
+
+    Evaluate    $options.add_argument("--incognito")
+    Evaluate    $options.add_argument("--no-sandbox")
+    Evaluate    $options.add_argument("--disable-dev-shm-usage")
+    Evaluate    $options.add_argument("--disable-gpu")
+    Evaluate    $options.add_argument("--window-size=1920,1080")
+
     Create Webdriver    Chrome    options=${options}
+
     Go To    ${URL}
     Maximize Browser Window
     Wait Until Element Is Visible    ${USERNAME_INPUT}    10s
@@ -141,7 +145,7 @@ Validate Products In Cart
     Page Should Contain    Sauce Labs Fleece Jacket
 
 Click Checkout Button
-    Wait Until Element Is Visible    ${Click_On_Check_Out}    10s
+    Wait Until Element Is Visible    ${Click_On_Check_Out}    30s
     Scroll Element Into View         ${Click_On_Check_Out}
     Click Element                    ${Click_On_Check_Out}
 
