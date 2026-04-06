@@ -1,13 +1,13 @@
 # 🤖 Robot Framework Automation - SauceDemo
 
-## 🔹 Project Description
+##  Project Description
 
 This project automates the SauceDemo application using **Robot Framework + SeleniumLibrary**.
 It covers end-to-end test scenarios like login, add to cart, checkout, and order validation.
 
 ---
 
-## 🔹 Tech Stack
+##  Tech Stack
 
 * Robot Framework
 * SeleniumLibrary
@@ -30,7 +30,7 @@ project/
 
 ---
 
-## 🔹 Setup Instructions
+##  Setup Instructions
 
 ### 1. Install Python
 
@@ -69,7 +69,7 @@ pip install robotframework-seleniumlibrary
 
 ---
 
-## 🔹 Run Tests Locally
+##  Run Tests Locally
 
 ```
 robot tests/
@@ -92,9 +92,9 @@ Open:
 
 ---
 
-# 🚀 Jenkins Execution
+#  Jenkins Execution
 
-## 🔹 Prerequisites
+##  Prerequisites
 
 * Jenkins installed on server
 * Python installed on server
@@ -106,7 +106,7 @@ Open:
 
 ---
 
-## 🔹 Jenkins Pipeline (Sample)
+##  Jenkins Pipeline (Sample)
 
 ```
 pipeline {
@@ -161,7 +161,7 @@ pipeline {
 
 ---
 
-## 🔹 How Jenkins Execution Works
+##  How Jenkins Execution Works
 
 1. Jenkins pulls code from GitHub
 2. Creates virtual environment
@@ -172,7 +172,7 @@ pipeline {
 
 ---
 
-## 🔹 Trigger Options
+##  Trigger Options
 
 * Manual build
 * Scheduled (2 AM daily)
@@ -180,7 +180,7 @@ pipeline {
 
 ---
 
-## 🔹 Output Files in Jenkins
+##  Output Files in Jenkins
 
 * `output.xml`
 * `log.html`
@@ -188,7 +188,7 @@ pipeline {
 
 ---
 
-## 🏆 Best Practices
+##  Best Practices
 
 * Use reusable keywords
 * Maintain Page Object Model
@@ -198,7 +198,7 @@ pipeline {
 
 ---
 
-## 👨‍💻 Author
+##  Author
 Shubham Sadgure
 
-Automation Framework by Shubham
+
