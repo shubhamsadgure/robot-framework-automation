@@ -2,11 +2,6 @@
 Library    SeleniumLibrary
 Resource    ../pages/SwagLabPage.robot
 
-
-Test Setup    Run Keywords    Open Login Page    AND    Login With User
-Test Teardown    Close Browser
-
-
 *** Test Cases ***
 Validate Successful Product Purchase Journey
     Validate Swag Labs Title
