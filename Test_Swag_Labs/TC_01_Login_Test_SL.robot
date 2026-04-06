@@ -2,6 +2,7 @@
 Library    SeleniumLibrary
 Resource    ../pages/SwagLabPage.robot
 
+
 Test Setup    Run Keywords    Open Login Page    AND    Login With User
 Test Teardown    Close Browser
 
@@ -19,4 +20,3 @@ Validate Successful Product Purchase Journey
     Verify Total Price Should Be Greater Than Sum Of Items
     Click On Finish
     Verify Thank You Message
-    Sleep    1s

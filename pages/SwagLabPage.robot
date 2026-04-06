@@ -2,6 +2,7 @@
 Library    SeleniumLibrary
 Library    String
 Library    Collections
+Resource    ../test_data/test_data.robot
 
 *** Variables ***
 ${URL}                    https://www.saucedemo.com/
@@ -36,15 +37,16 @@ ${Click_On_Finish}           id:finish
 *** Keywords ***
 
 Open Login Page
+    Log To Console    Opening the Browser
     ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
 
-    Evaluate    $options.add_argument("--headless=new")
+    #Evaluate    $options.add_argument("--headless=new")
     Evaluate    $options.add_argument("--no-sandbox")
     Evaluate    $options.add_argument("--disable-dev-shm-usage")
     Evaluate    $options.add_argument("--disable-gpu")
     Evaluate    $options.add_argument("--window-size=1920,1080")
 
-    # 🔥 Disable password manager completely
+    #  Disable password manager completely
     ${prefs}=    Create Dictionary
     ...    credentials_enable_service=False
     ...    profile.password_manager_enabled=False
@@ -52,16 +54,18 @@ Open Login Page
 
     Evaluate    $options.add_experimental_option("prefs", ${prefs})
 
-    # 🔥 Additional Chrome flags (VERY IMPORTANT)
+    #  Additional Chrome flags (VERY IMPORTANT)
     Evaluate    $options.add_argument("--disable-notifications")
     Evaluate    $options.add_argument("--disable-save-password-bubble")
     Evaluate    $options.add_argument("--disable-infobars")
     Evaluate    $options.add_argument("--incognito")
 
     Open Browser    ${URL}    chrome    options=${options}
+    Set Selenium Timeout    30s
 
 
 Get All Usernames
+    Log To Console    Getting the usernames
     ${text}=    Get Text    ${LOGIN_CREDENTIALS}
     @{users}=   Split To Lines    ${text}
     @{users}=   Get Slice From List    ${users}    1
@@ -70,6 +74,7 @@ Get All Usernames
 
 
 Get Password From UI
+    Log To Console    Getting the password
     ${text}=    Get Text    ${LOGIN_PASSWORD}
     @{lines}=   Split To Lines    ${text}
     ${password}=    Get From List    ${lines}    -1
@@ -78,6 +83,7 @@ Get Password From UI
 
 
 Login With Credentials
+    Log To Console    Loging with the credentials
     [Arguments]    ${username}    ${password}
     Input Text        ${USERNAME_INPUT}    ${username}
     Input Password    ${PASSWORD_INPUT}    ${password}
@@ -86,17 +92,17 @@ Login With Credentials
 
 
 Login With Random User
+    Log To Console    Loging with the random user
     @{users}=       Get All Usernames
     ${password}=    Get Password From UI
-
     ${index}=    Evaluate    random.randint(0, len(${users})-1)    random
     ${user}=     Get From List    ${users}    ${index}
-
     Log    Using random user: ${user}
     Login With Credentials    ${user}    ${password}
 
 
 Login With First User
+    Log To Console    Loging with first user
     @{users}=       Get All Usernames
     ${password}=    Get Password From UI
     ${user}=    Get From List    ${users}    0
@@ -105,11 +111,13 @@ Login With First User
 
 
 Reset To Login Page
+    Log To Console    Reseting the login page
     Go To    ${URL}
-    Wait Until Element Is Visible    ${USERNAME_INPUT}    10s
+    Wait Until Element Is Visible    ${USERNAME_INPUT}
 
 
 Get Standard User
+    Log To Console    Getting the user
     @{users}=    Get All Usernames
 
     FOR    ${user}    IN    @{users}
@@ -122,62 +130,62 @@ Get Standard User
     Fail    standard_user not found in UI list
 
 Login With User
+    Log To Console    Logging with user
     ${user}=        Get Standard User
     ${password}=    Get Password From UI
-
     Log    Using standard user: ${user}
     Login With Credentials    ${user}    ${password}
 
 
 Validate Swag Labs Title
+    Log To Console    ${VALIDATE_TITLE_MSG}
     ${title}=    Get Title
     Should Be Equal As Strings    ${title}    Swag Labs
 
 
 Add Bolt TShirt To Cart
-    Wait Until Element Is Visible    ${Add_Cart_Bolt_TShirt_Button}    10s
+    Log To Console    Adding bold T-shirt to cart
     Scroll Element Into View         ${Add_Cart_Bolt_TShirt_Button}
     Click Button                    ${Add_Cart_Bolt_TShirt_Button}
 
 Add Fleece Jacket To Cart
-    Wait Until Element Is Visible    ${Add_Cart_Fleece_Jacket_Button}    10s
+    Log To Console    Adding Fleecr jacket to cart
     Scroll Element Into View         ${Add_Cart_Fleece_Jacket_Button}
     Click Button                    ${Add_Cart_Fleece_Jacket_Button}
 
 
 Open Shopping Cart
-    Wait Until Element Is Visible    ${Shopping_Cart_Link}    10s
+    Log To Console    Opening the shopping cart
     Scroll Element Into View         ${Shopping_Cart_Link}
     Click Element                    ${Shopping_Cart_Link}
 
 Validate Products In Cart
-    Wait Until Element Is Visible    ${Shopping_Cart_Link}    10s
-    Page Should Contain    Sauce Labs Bolt T-Shirt
-    Page Should Contain    Sauce Labs Fleece Jacket
+    Log To Console    Validating the products in the cart
+    Page Should Contain    ${PRODUCT_1}
+    Page Should Contain    ${PRODUCT_2}
 
 Click Checkout Button
-    Wait Until Page Contains Element    ${Click_On_Check_Out}    30s
+    Log To Console    Cliking On The check box button
     Scroll Element Into View            ${Click_On_Check_Out}
-    Wait Until Element Is Visible       ${Click_On_Check_Out}    30s
     Click Element                       ${Click_On_Check_Out}
 
 
 Enter Checkout Details
+    Log To Console    Entering the checkout details
     ${random}=    Generate Random String    4    [LETTERS]
-
     ${first}=    Set Variable    John${random}
     ${last}=     Set Variable    Doe${random}
     ${zip}=      Generate Random String    6    [NUMBERS]
 
-    Wait Until Element Is Visible    ${First_Name}    10s
+
     Clear Element Text               ${First_Name}
     Input Text                       ${First_Name}    ${first}
 
-    Wait Until Element Is Visible    ${Last_Name}    10s
+
     Clear Element Text               ${Last_Name}
     Input Text                       ${Last_Name}    ${last}
 
-    Wait Until Element Is Visible    ${Zip_Code}    10s
+
     Clear Element Text               ${Zip_Code}
     Input Text                       ${Zip_Code}     ${zip}
 
@@ -185,18 +193,18 @@ Enter Checkout Details
 
 
 Click Continue Button
-    Wait Until Element Is Visible    ${Clik_Continue}    10s
+    Log To Console    Clicking on the continue button
     Scroll Element Into View         ${Clik_Continue}
-    Wait Until Element Is Enabled    ${Clik_Continue}    10s
     Wait Until Keyword Succeeds      3x    2s    Click Element    ${Clik_Continue}
 
 
 Verify Total Price Should Be Greater Than Sum Of Items
-    # Move to first price
-    Mouse Over    xpath=(//div[@data-test='inventory-item-price' and contains(text(),'$')])[1]
+    Log To Console    Verifying the total price should be greater than sum of items
+
+    Mouse Over    ${Item_Price1}
     ${price1_text}=    Get Text    ${Item_Price1}
 
-    Mouse Over    xpath=(//div[@data-test='inventory-item-price' and contains(text(),'$')])[2]
+    Mouse Over    ${Item_Price2}
     ${price2_text}=    Get Text    ${Item_Price2}
 
     Mouse Over    xpath=//div[@class='summary_total_label']
@@ -212,11 +220,12 @@ Verify Total Price Should Be Greater Than Sum Of Items
 
 
 Click On Finish
-    Wait Until Element Is Visible    ${Click_On_Finish}    10s
+    Log To Console    Clicking on finish button
     Scroll Element Into View         ${Click_On_Finish}
     Click Button                     ${Click_On_Finish}
 
 
 Verify Thank You Message
-    Page Should Contain    Thank you for your order!
+    Log To Console    Verifying the Thank You Message
+    Page Should Contain    ${THANK_YOU_MESSAGE}
 
