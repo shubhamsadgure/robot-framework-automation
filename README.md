@@ -21,8 +21,8 @@ It covers end-to-end test scenarios like login, add to cart, checkout, and order
 ```
 project/
 │
-├── tests/                # Test cases
-├── resources/            # Reusable keywords
+├── Test_Swag_Labs/       # Test cases
+├── Keywords/             # Reusable keywords
 ├── pages/                # Page object locators
 ├── test_data/            # Test data files
 ├── results/              # Execution reports
