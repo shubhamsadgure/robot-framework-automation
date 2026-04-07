@@ -1,6 +1,7 @@
 *** Settings ***
 Library    SeleniumLibrary
-Resource    ../pages/SwagLabPage.robot
+
+Resource    ../keywords/login_keywords.robot
 
 
 Suite Setup    Run Keywords    Open Login Page    AND    Login With User

@@ -1,6 +1,13 @@
 *** Settings ***
 Library    SeleniumLibrary
-Resource    ../pages/SwagLabPage.robot
+#Resource    ../pages/SwagLabPage.robot
+Resource    ../keywords/product_keywords.robot
+Resource    ../keywords/checkout_complete_keywords.robot
+Resource    ../keywords/checkout_information_keywords.robot
+Resource    ../keywords/checkout_overview_keywords.robot
+Resource    ../keywords/cart_keywords.robot
+
+
 
 *** Test Cases ***
 Validate Successful Product Purchase Journey
