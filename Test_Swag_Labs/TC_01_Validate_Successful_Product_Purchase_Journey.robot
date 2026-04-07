@@ -11,6 +11,7 @@ Resource    ../keywords/cart_keywords.robot
 
 *** Test Cases ***
 Validate Successful Product Purchase Journey
+    [Tags]    smoke    regression
     Validate Swag Labs Title
     Add Bolt TShirt To Cart
     Add Fleece Jacket To Cart
